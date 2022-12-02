@@ -1,0 +1,15 @@
+﻿@using _101_Controller.Controllers;
+
+@{
+    ViewData["Title"] = "Index4";
+}
+@model List<Product2>;
+
+
+    @foreach (var item in Model)
+{
+    <p>@item.Id - @item.Name</p>
+}
+
+<h1>Index4</h1>
+
