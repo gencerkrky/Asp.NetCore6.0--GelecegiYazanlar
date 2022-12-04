@@ -5,3 +5,24 @@
 
 <h1>Ürün Ekleme</h1>
 
+<form asp-controller="product" asp-action="saveproduct" method="post">
+    <label>Ürün ismi</label>
+    <input type="text" name="Name" />
+    <br/>
+
+    <label>Ürün Fiyat</label>
+    <input type="text" name="Price" />
+    <br />
+
+    <label>Ürün Stok</label>
+    <input type="text" name="Stock" />
+    <br />
+
+    <label>Ürün Renk</label>
+    <input type="text" name="Color" />
+    <br />
+
+    <button type="submit">Ürün Kaydet</button>
+
+
+</form>

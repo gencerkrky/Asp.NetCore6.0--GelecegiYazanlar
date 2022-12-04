@@ -37,7 +37,14 @@ namespace _101_Controller.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
         public IActionResult Add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult SaveProduct()
         {
             return View();
         }
