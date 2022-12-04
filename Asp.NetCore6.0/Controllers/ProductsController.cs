@@ -45,16 +45,17 @@ namespace _101_Controller.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaveProduct()
+        public IActionResult Add(Product newProduct)
         {
             //1.Yöntem
 
-            var name = HttpContext.Request.Form["Name"].ToString();
-            var price = decimal.Parse(HttpContext.Request.Form["Price"].ToString());
-            var stock = int.Parse(HttpContext.Request.Form["Stock"].ToString());
-            var color = HttpContext.Request.Form["Color"].ToString();
+            //var name = HttpContext.Request.Form["Name"].ToString();
+            //var price = decimal.Parse(HttpContext.Request.Form["Price"].ToString());
+            //var stock = int.Parse(HttpContext.Request.Form["Stock"].ToString());
+            //var color = HttpContext.Request.Form["Color"].ToString();
 
-            Product newProduct = new Product() { Name = name, Price = price, Stock = stock, Color = color };
+            //2. yöntem
+            //Product newProduct = new Product() { Name = Name, Price = Price, Stock = Stock, Color = Color };
 
             _context.Products.Add(newProduct);
             _context.SaveChanges();
