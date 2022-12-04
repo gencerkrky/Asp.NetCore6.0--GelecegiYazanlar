@@ -59,6 +59,7 @@ namespace _101_Controller.Controllers
 
             _context.Products.Add(newProduct);
             _context.SaveChanges();
+            TempData["status"] = "Ürün başarıyla eklendi";
 
             return RedirectToAction("Index");
         }
@@ -75,6 +76,7 @@ namespace _101_Controller.Controllers
 
             _context.Products.Update(updateProduct);
             _context.SaveChanges();
+            TempData["status"] = "Ürün başarıyla güncellendi";
 
 
             return RedirectToAction("Index");

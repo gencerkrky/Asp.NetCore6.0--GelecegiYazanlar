@@ -4,6 +4,12 @@
 @model List<Product>
 
 <h1>Ürünler</h1>
+
+@if (TempData["status"] != null)
+{
+    <div class="alert alert-primary">@TempData["status"]</div>
+}
+
 <a asp-controller="products" asp-action="add">Ürün Ekle</a>
 <table class="table">
     <thead>
