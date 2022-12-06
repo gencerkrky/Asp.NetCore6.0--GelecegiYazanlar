@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Add";
 }
 @model Product
@@ -10,7 +9,7 @@
 
     <div class="mb-3">
         <label asp-for="Name" class="form-label">Ürün ismi</label>
-        <input class="form-control" asp-for="Name">      
+        <input class="form-control" asp-for="Name">
     </div>
 
     <div class="mb-3">
@@ -24,8 +23,11 @@
     </div>
 
     <div class="mb-3">
-        <label asp-for="Color" class="form-label">Ürün Renk</label>
-        <input class="form-control" asp-for="Color">
+        @* <label asp-for="Color" class="form-label">Ürün Renk</label>
+        <input class="form-control" asp-for="Color">*@
+        <select class="form-select" asp-for="Color" asp-items="@ViewBag.ColorSelect">
+            <option value="">Renk Seçiniz</option>
+        </select>
     </div>
 
     <div class="form-check">
@@ -50,9 +52,22 @@
         <textarea asp-for="Description" class="form-control" placeholder="Ürün Açıklama" style="height: 100px"></textarea>
         <label asp-for="Description">Ürün Açıklama</label>
     </div>
-     
+
+    <div class="mb-3">
+        <label asp-for="PublishDate" class="form-label">Ürün Yayınlanma Tarih</label>
+        <input class="form-control" asp-for="PublishDate">
+    </div>
+
 
     <button class="btn btn-primary mt-3" type="submit">Ürün Kaydet</button>
 
 
 </form>
+
+
+@section Scripts
+    {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    }

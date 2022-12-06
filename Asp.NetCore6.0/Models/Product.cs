@@ -11,6 +11,7 @@
         public string Description { get; set; }
         public string? Color { get; set; }
 
+        public DateTime? PublishDate { get; set; }
         public bool IsPublish { get; set; }
 
         public int Expire { get; set; }

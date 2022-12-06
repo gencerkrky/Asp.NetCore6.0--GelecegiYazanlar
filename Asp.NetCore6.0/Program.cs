@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 using Turkcell.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     //dbContext.products
     options.UseSqlServer(builder.Configuration.GetConnectionString("SqlCon"));
 });
+
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());    
 
 var app = builder.Build();
 

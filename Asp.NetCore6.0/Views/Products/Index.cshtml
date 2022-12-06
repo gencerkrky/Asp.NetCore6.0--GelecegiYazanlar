@@ -22,6 +22,7 @@
             <th>Yayınlansın mı?</th>
             <th>Süre</th>
             <th>Açıklama</th>
+            <th>Yayınlanma tarihi</th>
             <th>İşlem</th>
         </tr>
     </thead>
@@ -48,7 +49,7 @@
                         @item.Description
                     }
                 </td>
-
+                <td>@item.PublishDate</td>
 
                 <td>
                     <a asp-controller="products" asp-action="remove" asp-route-id="@item.Id">Sil</a>
