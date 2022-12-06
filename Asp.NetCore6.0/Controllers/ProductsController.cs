@@ -1,5 +1,7 @@
 ﻿using _101_Controller.Models;
+using Asp.NetCore6._0.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using MyAspNetCoreApp.Web.Models;
 using System.Linq;
 using System.Security.AccessControl;
@@ -49,6 +51,15 @@ namespace _101_Controller.Controllers
                 {"12 Ay",12 },
             };
 
+
+            ViewBag.ColorSelect = new SelectList(new List<ColorSelectList>
+            {
+                new(){Data="Mavi",Value="Mavi"},
+                new(){Data="Kırmızı",Value="Kırmızı"},
+                new(){Data="Sarı",Value="Sarı"},
+                new(){Data="Yeşil",Value="Yesil"},
+
+            },"Value","Data");
             
 
             return View();
@@ -77,6 +88,26 @@ namespace _101_Controller.Controllers
         public IActionResult Update(int id)
         {
             var product = _context.Products.Find(id);
+
+            ViewBag.ExpireValue = product.Expire;
+            ViewBag.Expire = new Dictionary<string, int>()
+            {
+                {"1 Ay",1 },
+                {"3 Ay",3 },
+                {"6 Ay",6 },
+                {"12 Ay",12 },
+            };
+
+
+            ViewBag.ColorSelect = new SelectList(new List<ColorSelectList>
+            {
+                new(){Data="Mavi",Value="Mavi"},
+                new(){Data="Kırmızı",Value="Kırmızı"},
+                new(){Data="Sarı",Value="Sarı"},
+                new(){Data="Yeşil",Value="Yesil"},
+
+            }, "Value", "Data",product.Color);
+
 
             return View(product);
         }
