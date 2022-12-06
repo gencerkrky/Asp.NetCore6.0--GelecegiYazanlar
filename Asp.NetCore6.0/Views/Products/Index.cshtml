@@ -21,6 +21,7 @@
             <th>Renk</th>
             <th>Yayınlansın mı?</th>
             <th>Süre</th>
+            <th>Açıklama</th>
             <th>İşlem</th>
         </tr>
     </thead>
@@ -34,9 +35,19 @@
                 <td>@item.Stock</td>
                 <td>@item.Color</td>
                 <td>
-                    @(item.IsPublish ? "Evet" : "Hayır") 
+                    @(item.IsPublish ? "Evet" : "Hayır")
                 </td>
                 <td>@item.Expire</td>
+                <td>
+                    @if (item.Description.Length > 20)
+                    {
+                        @item.Description.Substring(0,20) <text>...</text>
+                    }
+                    else
+                    {
+                        @item.Description
+                    }
+                </td>
 
 
                 <td>
