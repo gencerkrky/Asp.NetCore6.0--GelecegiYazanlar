@@ -9,24 +9,43 @@
 <form asp-controller="Products" asp-action="Add" method="post">
 
     <div class="mb-3">
-        <label for="Name" class="form-label">Ürün ismi</label>
+        <label asp-for="Name" class="form-label">Ürün ismi</label>
         <input class="form-control" asp-for="Name">      
     </div>
 
     <div class="mb-3">
-        <label for="Name" class="form-label">Ürün Fiyatı</label>
+        <label asp-for="Price" class="form-label">Ürün Fiyatı</label>
         <input class="form-control" asp-for="Price">
     </div>
 
     <div class="mb-3">
-        <label for="Name" class="form-label">Ürün Stok</label>
+        <label asp-for="Stock" class="form-label">Ürün Stok</label>
         <input class="form-control" asp-for="Stock">
     </div>
 
     <div class="mb-3">
-        <label for="Name" class="form-label">Ürün Renk</label>
+        <label asp-for="Color" class="form-label">Ürün Renk</label>
         <input class="form-control" asp-for="Color">
     </div>
+
+    <div class="form-check">
+        <input class="form-check-input" asp-for="IsPublish">
+        <label class="form-check-label" asp-for="IsPublish">
+            Yayınlansın mı?
+        </label>
+    </div>
+
+    <span class="mt-3 mb-3">Ürün kaç ay satışta kalıcak ?</span>
+    @foreach (var item in ViewBag.Expire as Dictionary<string, int>)
+    {
+        <div class="form-check mb-3 mt-3">
+            <input class="form-check-input" type="radio" id="@(item.Value)Expire" asp-for="Expire" value="@item.Value">
+            <label class="form-check-label" asp-for="Expire" for="@(item.Value)Expire">
+                @item.Key
+            </label>
+        </div>
+    }
+
 
     <button class="btn btn-primary" type="submit">Ürün Kaydet</button>
 
