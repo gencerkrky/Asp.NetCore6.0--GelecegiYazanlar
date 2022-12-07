@@ -31,6 +31,8 @@ namespace _101_Controller.Controllers
         {
             var products = _context.Products.ToList();
 
+
+
             return View(products);
         }
 
