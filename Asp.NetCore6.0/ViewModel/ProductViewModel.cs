@@ -1,12 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Build.Framework;
-using System.ComponentModel.DataAnnotations;
-
-namespace Asp.NetCore6._0.ViewModel
+﻿namespace Asp.NetCore6._0.ViewModel
 {
     public class ProductViewModel
     {
         public int Id { get; set; }
+
+        [Required]//alanı zorunlu kılar
 
         [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "boş olamaz")]//alanı zorunlu kılar
         [Remote(action: "HasProductName",controller:"Products")]
