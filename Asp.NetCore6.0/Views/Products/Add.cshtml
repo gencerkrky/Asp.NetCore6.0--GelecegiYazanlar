@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Add";
 }
-@model Product
+@model ProductViewModel
 
 <h1>Ürün Ekleme</h1>
 
@@ -10,6 +10,7 @@
     <div class="mb-3">
         <label asp-for="Name" class="form-label">Ürün ismi</label>
         <input class="form-control" asp-for="Name">
+        <span class="text-danger" asp-validation-for="Name"></span>
     </div>
 
     <div class="mb-3">
@@ -23,8 +24,7 @@
     </div>
 
     <div class="mb-3">
-        @* <label asp-for="Color" class="form-label">Ürün Renk</label>
-        <input class="form-control" asp-for="Color">*@
+
         <select class="form-select" asp-for="Color" asp-items="@ViewBag.ColorSelect">
             <option value="">Renk Seçiniz</option>
         </select>
@@ -57,7 +57,6 @@
         <label asp-for="PublishDate" class="form-label">Ürün Yayınlanma Tarih</label>
         <input class="form-control" asp-for="PublishDate">
     </div>
-
 
     <button class="btn btn-primary mt-3" type="submit">Ürün Kaydet</button>
 
