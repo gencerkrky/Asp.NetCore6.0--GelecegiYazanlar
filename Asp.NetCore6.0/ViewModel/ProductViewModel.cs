@@ -1,4 +1,5 @@
-﻿using Microsoft.Build.Framework;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Build.Framework;
 using System.ComponentModel.DataAnnotations;
 
 namespace Asp.NetCore6._0.ViewModel
@@ -8,6 +9,7 @@ namespace Asp.NetCore6._0.ViewModel
         public int Id { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "boş olamaz")]//alanı zorunlu kılar
+        [Remote(action: "HasProductName",controller:"Products")]
         public string? Name { get; set; }
         public decimal Price { get; set; }
 

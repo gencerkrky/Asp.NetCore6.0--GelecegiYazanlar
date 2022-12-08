@@ -165,5 +165,39 @@ namespace _101_Controller.Controllers
 
             return RedirectToAction("Index");
         }
+
+
+        [Route("[controller]/[action]/page/{page}/pagesize/{pagesize}")]
+        [HttpGet]
+        public IActionResult GetData(int page, int pageSize)
+        {
+
+
+            return View();
+        }
+
+        [AcceptVerbs("GET", "POST")]
+        public IActionResult HasProductName(string Name)
+        {
+
+            var anyProduct = _context.Products.Any(x => x.Name.ToLower() == Name.ToLower());
+
+            if (anyProduct)
+            {
+                return Json("Kaydetmeye çalıştığınız ürün ismi veritabanında bulunmaktadır.");
+            }
+            else
+            {
+                return Json(true);
+            }
+
+
+
+
+        }
+
+
+
+
     }
 }
