@@ -1,5 +1,7 @@
 ﻿using _101_Controller.Models;
 using Asp.NetCore6._0.Models;
+using Asp.NetCore6._0.ViewModel;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MyAspNetCoreApp.Web.Models;
@@ -14,10 +16,12 @@ namespace _101_Controller.Controllers
 
         private AppDbContext _context;
 
+        private readonly IMapper _mapper;
+
 
         private readonly ProductRepository _productRepository;
 
-        public ProductsController(AppDbContext context)
+        public ProductsController(AppDbContext context, IMapper mapper)
         {
             //DI Container hazır frameworkte gömülü oldugu için herhangibi bir class constructor gectigimiz anda diger container bir nesne örgenigi contexte üretiyor
             //Dependency Injection Pattern
@@ -25,15 +29,14 @@ namespace _101_Controller.Controllers
 
 
             _context = context;
+            _mapper = mapper;
         }
 
         public IActionResult Index()
         {
             var products = _context.Products.ToList();
 
-
-
-            return View(products);
+            return View(_mapper.Map<List<ProductViewModel>>(products));
         }
 
         public IActionResult Remove(int id)
@@ -45,7 +48,7 @@ namespace _101_Controller.Controllers
         [HttpGet]
         public IActionResult Add()
         {
-            ViewBag.Expire = new Dictionary<string, int>() 
+            ViewBag.Expire = new Dictionary<string, int>()
             {
                 {"1 Ay",1 },
                 {"3 Ay",3 },
@@ -61,14 +64,14 @@ namespace _101_Controller.Controllers
                 new(){Data="Sarı",Value="Sarı"},
                 new(){Data="Yeşil",Value="Yesil"},
 
-            },"Value","Data");
-            
+            }, "Value", "Data");
+
 
             return View();
         }
 
         [HttpPost]
-        public IActionResult Add(Product newProduct)
+        public IActionResult Add(ProductViewModel newProduct)
         {
             //1.Yöntem
 
@@ -80,12 +83,50 @@ namespace _101_Controller.Controllers
             //2. yöntem
             //Product newProduct = new Product() { Name = Name, Price = Price, Stock = Stock, Color = Color };
 
-            _context.Products.Add(newProduct);
-            _context.SaveChanges();
-            TempData["status"] = "Ürün başarıyla eklendi";
 
-            return RedirectToAction("Index");
+            ViewBag.Expire = new Dictionary<string, int>()
+            {
+                {"1 Ay",1 },
+                {"3 Ay",3 },
+                {"6 Ay",6 },
+                {"12 Ay",12 },
+            };
+
+
+            ViewBag.ColorSelect = new SelectList(new List<ColorSelectList>
+            {
+                new(){Data="Mavi",Value="Mavi"},
+                new(){Data="Kırmızı",Value="Kırmızı"},
+                new(){Data="Sarı",Value="Sarı"},
+                new(){Data="Yeşil",Value="Yesil"},
+
+            }, "Value", "Data");
+
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Products.Add(_mapper.Map<Product>(newProduct));
+                    _context.SaveChanges();
+                    TempData["status"] = "Ürün başarıyla eklendi";
+
+                    return RedirectToAction("Index");
+                }
+                catch (Exception)
+                {
+
+                    ModelState.AddModelError(String.Empty, "Ürün Kaydedilirken hata meydana geldi. Lütfen daha sonra deneyiniz");
+                    return View();
+
+                }
+            }
+            else
+            {
+                return View();
+            }
         }
+
         [HttpGet]
         public IActionResult Update(int id)
         {
@@ -108,7 +149,7 @@ namespace _101_Controller.Controllers
                 new(){Data="Sarı",Value="Sarı"},
                 new(){Data="Yeşil",Value="Yesil"},
 
-            }, "Value", "Data",product.Color);
+            }, "Value", "Data", product.Color);
 
 
             return View(product);
