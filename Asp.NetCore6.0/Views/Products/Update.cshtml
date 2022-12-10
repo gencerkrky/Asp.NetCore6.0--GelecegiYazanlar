@@ -1,25 +1,32 @@
 ﻿@{
     ViewData["Title"] = "Update";
 }
-@model Product
+@model ProductViewModel
 
 <h1>Ürün Güncelleme</h1>
 
 <form asp-controller="Products" asp-action="Update" method="post">
 
+    <input type="hidden" asp-for="Id" />
+
     <div class="mb-3">
         <label asp-for="Name" class="form-label">Ürün ismi</label>
         <input class="form-control" asp-for="Name">
+        <span class="text-danger" asp-validation-for="Name"></span>
     </div>
 
     <div class="mb-3">
         <label asp-for="Price" class="form-label">Ürün Fiyatı</label>
         <input class="form-control" asp-for="Price">
+        <span class="text-danger" asp-validation-for="Price"></span>
+
     </div>
 
     <div class="mb-3">
         <label asp-for="Stock" class="form-label">Ürün Stok</label>
         <input class="form-control" asp-for="Stock">
+        <span class="text-danger" asp-validation-for="Stock"></span>
+
     </div>
 
     <div class="mb-3">
@@ -28,6 +35,8 @@
         <select class="form-select" asp-for="Color" asp-items="@ViewBag.ColorSelect">
             <option value="">Renk Seçiniz</option>
         </select>
+        <span class="text-danger" asp-validation-for="Color"></span>
+
     </div>
 
     <div class="form-check">
@@ -57,17 +66,17 @@
 
                 <label class="form-check-label" asp-for="Expire" for="@(item.Value)Expire">@item.Key</label>
             </div>
-
-
-
-
-
         }
+
+        <span class="text-danger" asp-validation-for="Expire"></span>
+
     </div>
 
     <div class="form-floating">
         <textarea asp-for="Description" class="form-control" placeholder="Ürün Açıklama" style="height: 100px"></textarea>
         <label asp-for="Description">Ürün Açıklama</label>
+        <span class="text-danger" asp-validation-for="Description"></span>
+
     </div>
 
     <div class="mb-3">
@@ -77,6 +86,13 @@
 
 
     <button class="btn btn-primary mt-3" type="submit">Ürün Güncelle</button>
+    <a asp-controller="Products" asp-action="Index">Geri</a>
 
 
 </form>
+@section Scripts
+    {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    }

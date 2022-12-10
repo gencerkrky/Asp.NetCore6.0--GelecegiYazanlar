@@ -127,6 +127,8 @@ namespace _101_Controller.Controllers
             }
         }
 
+
+
         [HttpGet]
         public IActionResult Update(int id)
         {
@@ -152,13 +154,36 @@ namespace _101_Controller.Controllers
             }, "Value", "Data", product.Color);
 
 
-            return View(product);
+            return View(_mapper.Map<ProductViewModel>(product));
         }
         [HttpPost]
-        public IActionResult Update(Product updateProduct)
+        public IActionResult Update(ProductViewModel updateProduct)
         {
+            if (!ModelState.IsValid)
+            {
 
-            _context.Products.Update(updateProduct);
+                ViewBag.ExpireValue = updateProduct.Expire;
+                ViewBag.Expire = new Dictionary<string, int>()
+            {
+                {"1 Ay",1 },
+                {"3 Ay",3 },
+                {"6 Ay",6 },
+                {"12 Ay",12 },
+            };
+
+
+                ViewBag.ColorSelect = new SelectList(new List<ColorSelectList>
+            {
+                new(){Data="Mavi",Value="Mavi"},
+                new(){Data="Kırmızı",Value="Kırmızı"},
+                new(){Data="Sarı",Value="Sarı"},
+                new(){Data="Yeşil",Value="Yesil"},
+
+            }, "Value", "Data", updateProduct.Color);
+
+            }
+
+            _context.Products.Update(_mapper.Map<Product>(updateProduct));
             _context.SaveChanges();
             TempData["status"] = "Ürün başarıyla güncellendi";
 

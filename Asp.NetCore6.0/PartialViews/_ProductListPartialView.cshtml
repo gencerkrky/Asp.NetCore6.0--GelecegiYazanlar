@@ -1,0 +1,32 @@
+﻿@using Asp.NetCore6._0.ViewModel;
+
+@model ProductListPartialViewModel
+
+
+<table class="table">
+
+    <thead class="thead-dark">
+        <tr>
+
+            <th>Id</th>
+            <th>İsim</th>
+            <th>Fiyat</th>
+            <th>Stock</th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Products)
+        {
+             <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Price</td>
+                <td>@item.Stock</td>
+        </tr>
+        }
+       
+
+
+    </tbody>
+</table>

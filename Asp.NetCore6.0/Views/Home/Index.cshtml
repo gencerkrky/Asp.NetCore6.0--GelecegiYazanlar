@@ -3,30 +3,24 @@
 }
 @section Css{
 
-    <link rel="stylesheet" href="~/css/example.css" />
 
-    <style>
-        h1{
-            color:red;
-            background-color:blue;
-        }
-    </style>
 
 }
 @section Scripts
-{
-    <script type="text/javascript">
-       // alert("Hoşgeldin")
-           $(document).ready(function(){
-               console.log("hoşgeldin")
-           })
+    {
 
-    </script>
 
 }
-<h1>Hello</h1>
 
-<h2>merhaba aps net bu style dosyadan gelmekte</h2>
 
-@*<partial name="_MenuPartialView"/>
-@await Html.PartialAsync("_MenuPartialView")*@
+<div class="row">
+    <div class="col-md-4">
+
+        <partial name="~/PartialViews/_ProductListPartialView.cshtml" model="@ViewBag.productListPartialViewModel" />
+    </div>
+    <div class="col-md-4">
+
+
+    </div>
+
+</div>
