@@ -1,4 +1,5 @@
 ﻿using _101_Controller.Models;
+using Asp.NetCore6._0.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Turkcell.Models
@@ -12,5 +13,6 @@ namespace Turkcell.Models
 
         public DbSet<Product> Products { get; set; }
 
+        public DbSet<Visitor> Visitors { get; set; }
     }
 }

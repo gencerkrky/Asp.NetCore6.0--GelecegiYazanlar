@@ -1,5 +1,7 @@
 ﻿using _101_Controller.Models;
+using Asp.NetCore6._0.Models;
 using Asp.NetCore6._0.ViewModel;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -15,12 +17,14 @@ namespace _101_Controller.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly AppDbContext _context;
+        private readonly IMapper _mapper;
 
 
-        public HomeController(ILogger<HomeController> logger, AppDbContext context)
+        public HomeController(ILogger<HomeController> logger, AppDbContext context, IMapper mapper)
         {
             _logger = logger;
             _context = context;
+            _mapper = mapper;
         }
 
         public IActionResult Index()
@@ -63,6 +67,40 @@ namespace _101_Controller.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+
+        public IActionResult Visitor()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult SaveVisitorComment(VisitorViewModel visitorViewModel)
+        {
+
+            try
+            {
+                var visitor = _mapper.Map<Visitor>(visitorViewModel);
+
+                visitor.Created = DateTime.Now;
+                _context.Visitors.Add(visitor);
+                _context.SaveChanges();
+
+                TempData["result"] = "Yorum Kaydedilmiştir";
+
+            return RedirectToAction(nameof(HomeController.Visitor));
+            }
+            catch (Exception)
+            {
+                TempData["result"] = "Yorum Kaydedilirken Hata eydana geldi";
+                return RedirectToAction(nameof(HomeController.Visitor));
+            }
+
+
+            
+
+
         }
     }
 }
