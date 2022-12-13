@@ -1,0 +1,68 @@
+﻿@{
+    ViewData["Title"] = "Pages";
+}
+@model List<ProductViewModel>
+<h1>Pages</h1>
+<h2>page : @ViewBag.page</h2>
+<h2>pageSize : @ViewBag.pageSize</h2>
+
+
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+        <th>Id</th>
+        <th>İsim</th>
+        <th>Fiyat</th>
+        <th>Stok</th>
+        <th>Renk</th>
+         <th>Yayınlansın mı ?</th>
+            <th>Süre(Ay)</th>
+            <th>Açıklama</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+              <td>@item.Name</td>
+                <td>@item.Price</td>
+                  <td>@item.Stock</td>
+                  <td>@item.Color</td>
+                  <td>
+                   @(item.IsPublish ? "Evet" : "Hayır")
+
+                  </td>
+                  <td>@item.Expire</td>
+                  <td>@if(item.Description.Length>20)
+                    {
+                        
+                        @item.Description.Substring(0,20)<text>...</text>
+
+                    }
+                    else
+                    {
+                       @item.Description
+                    }
+                </td>
+                  <td>
+                      <a asp-controller="products" asp-action="remove" asp-route-id="@item.Id">Sil</a>
+                      
+                                <a asp-controller="products" asp-action="update" asp-route-id="@item.Id">Güncelle</a>   
+                                
+
+                                <a asp-controller="products"  asp-action="getbyid" asp-route-productid=@item.Id>Ürün sayfasına git</a>
+
+
+
+                  </td>
+        </tr>
+    }
+    </tbody>
+
+
+</table>

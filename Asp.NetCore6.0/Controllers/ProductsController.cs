@@ -11,14 +11,14 @@ using Turkcell.Models;
 
 namespace _101_Controller.Controllers
 {
+
+    [Route("[controller]/[action]")]
     public class ProductsController : Controller
     {
 
         private AppDbContext _context;
 
         private readonly IMapper _mapper;
-
-
         private readonly ProductRepository _productRepository;
 
         public ProductsController(AppDbContext context, IMapper mapper)
@@ -39,6 +39,41 @@ namespace _101_Controller.Controllers
             return View(_mapper.Map<List<ProductViewModel>>(products));
         }
 
+        //[HttpGet("{page}/{pageSize}")]
+        [Route("[controller]/[action]/{page}/{pageSize}", Name = "productpage")]
+        public IActionResult Pages(int page, int pageSize)
+        {
+
+            // page=1 pagesize=3 => ilk 3 kayıt
+            // page=2 pagesize=3 => ikinci 3 kayıt
+            // page=3 pagesize=3 => üçüncü 3 kayıt
+
+            var products = _context.Products.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+
+
+            ViewBag.page = page;
+            ViewBag.pageSize = pageSize;
+
+
+            return View(_mapper.Map<List<ProductViewModel>>(products));
+        }
+
+
+
+        [Route("urunler/urun/{productid}", Name = "product")]
+        public IActionResult GetById(int productid)
+        {
+
+            var product = _context.Products.Find(productid);
+
+
+            return View(_mapper.Map<ProductViewModel>(product));
+
+
+        }
+
+        [HttpGet("{id}")]
         public IActionResult Remove(int id)
         {
             _productRepository.Remove(id);
