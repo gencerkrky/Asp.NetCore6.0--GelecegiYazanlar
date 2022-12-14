@@ -1,4 +1,5 @@
 ﻿using _101_Controller.Models;
+using Asp.NetCore6._0.Filters;
 using Asp.NetCore6._0.Models;
 using Asp.NetCore6._0.ViewModel;
 using AutoMapper;
@@ -13,6 +14,10 @@ using Turkcell.Models;
 
 namespace _101_Controller.Controllers
 {
+    // Eger En üstte Route kullanılırsa  Indexteki Routelerde "/" kullan eger en üstte kullanmazsan "/" gerek yok
+    //[Route("[controller]/[action]")]
+
+    [LogFilter]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -27,6 +32,9 @@ namespace _101_Controller.Controllers
             _mapper = mapper;
         }
 
+        //[Route("/")]
+        //[Route("/Home")]
+        //[Route("/Home/Index")]
         public IActionResult Index()
         {
             var products = _context.Products.OrderByDescending(x => x.Id).Select(x => new ProductPartialViewModel()
