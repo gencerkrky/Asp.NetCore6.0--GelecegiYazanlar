@@ -1,3 +1,4 @@
+using Asp.NetCore6._0.Filters;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using Turkcell.Models;
@@ -13,7 +14,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SqlCon"));
 });
 
-builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());    
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+builder.Services.AddScoped<NotFoundFilter>();
 
 var app = builder.Build();
 

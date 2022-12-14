@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Index";
 }
 @model List<ProductViewModel>
@@ -55,9 +54,15 @@
                 <td>
                     <a asp-controller="products" asp-action="remove" asp-route-id="@item.Id">Sil</a>
                     <a asp-controller="products" asp-action="Update" asp-route-id="@item.Id">Güncelle</a>
-
+                    <a asp-controller="products" asp-action="getbyid" asp-route-productid="@item.Id">Ürün Sayfasına Git</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+<a asp-controller="blog" asp-action="article" asp-route-name="makale-ismi" asp-route-id="2">Makaleye git</a>
+
+<a asp-controller="product" asp-action="pages" asp-route-page="1" asp-route-pagesize="3">1. sayfadan 3 ürün ver</a>
+
+<a asp-controller="product" asp-action="pages" asp-route-page="2" asp-route-pagesize="6">2. sayfadan 6 ürün ver</a>

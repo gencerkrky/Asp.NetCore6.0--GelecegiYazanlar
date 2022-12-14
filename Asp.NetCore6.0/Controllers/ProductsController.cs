@@ -1,4 +1,5 @@
 ﻿using _101_Controller.Models;
+using Asp.NetCore6._0.Filters;
 using Asp.NetCore6._0.Models;
 using Asp.NetCore6._0.ViewModel;
 using AutoMapper;
@@ -60,7 +61,7 @@ namespace _101_Controller.Controllers
         }
 
 
-
+        [ServiceFilter(typeof(NotFoundFilter))]//parametre aldıgı için servicefilterla tanımlandı almasaydı [NotFoundFilter] olarak tanımlana bilirdi
         [Route("urunler/urun/{productid}", Name = "product")]
         public IActionResult GetById(int productid)
         {
@@ -73,10 +74,17 @@ namespace _101_Controller.Controllers
 
         }
 
+        [ServiceFilter(typeof(NotFoundFilter))]
         [HttpGet("{id}")]
         public IActionResult Remove(int id)
         {
-            _productRepository.Remove(id);
+            var product = _context.Products.Find(id);
+
+
+            _context.Products.Remove(product);
+
+            _context.SaveChanges();
+
             return RedirectToAction("Index");
         }
 
@@ -163,7 +171,7 @@ namespace _101_Controller.Controllers
         }
 
 
-
+        [ServiceFilter(typeof(NotFoundFilter))]
         [HttpGet]
         public IActionResult Update(int id)
         {
