@@ -49,8 +49,11 @@ namespace _101_Controller.Controllers
             return View();
         }
 
+
+        // [CustonExceptionFilter]
         public IActionResult Privacy()
         {
+           // throw new Exception("Verinitabanı hatası");
 
             var products = _context.Products.OrderByDescending(x => x.Id).Select(x => new ProductPartialViewModel()
             {

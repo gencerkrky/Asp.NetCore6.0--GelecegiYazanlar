@@ -4,6 +4,7 @@ namespace _101_Controller.Controllers
 {
     public class ExampleController : Controller
     {
+
         public IActionResult Index()
         {
             return View();

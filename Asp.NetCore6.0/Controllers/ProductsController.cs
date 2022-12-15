@@ -33,6 +33,7 @@ namespace _101_Controller.Controllers
             _mapper = mapper;
         }
 
+        [CacheResourceFilter]
         public IActionResult Index()
         {
             var products = _context.Products.ToList();
