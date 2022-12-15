@@ -14,10 +14,6 @@ using Turkcell.Models;
 
 namespace _101_Controller.Controllers
 {
-    // Eger En üstte Route kullanılırsa  Indexteki Routelerde "/" kullan eger en üstte kullanmazsan "/" gerek yok
-    //[Route("[controller]/[action]")]
-
-    [LogFilter] // uygulama calısınca Output tan kontrol edilebilir 
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
