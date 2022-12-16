@@ -12,3 +12,8 @@
 [Gencer Karakaya-Asp.Net Core MVC301.pdf](https://github.com/gencerkrky/Asp.NetCore6.0--GelecegiYazanlar/files/10207626/Gencer.Karakaya-Asp.Net.Core.MVC301.pdf)
 ![Screenshot_5](https://user-images.githubusercontent.com/104096533/207038182-0f7c01ed-9366-4bc1-ae87-6d562bc6a1d5.png)
 
+401 eğitiminde // Routing - Filters - Middleware - File Upload - OneToMany Relationship/Cookie/Ajax/Publish  <br/>
+[Gencer Karakaya-Asp.Net Core MVC401.pdf](https://github.com/gencerkrky/Asp.NetCore6.0--GelecegiYazanlar/files/10245814/Gencer.Karakaya-Asp.Net.Core.MVC401.pdf)
+![Screenshot_1](https://user-images.githubusercontent.com/104096533/208100491-455490cf-e1a2-4231-8d6a-5236762c9843.png)
+
+
