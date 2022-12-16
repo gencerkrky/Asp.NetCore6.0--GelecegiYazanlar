@@ -1,3 +1,5 @@
+using MiddlewareExample.Web.Middleware;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -75,6 +77,7 @@ app.UseStaticFiles();
 //}); 
 #endregion
 
+// MapWhen kullanýmý
 #region MapWhep Calýsma yapýsý
 //app.MapWhen(context => context.Request.Query.ContainsKey("name"), app =>
 //{
@@ -101,7 +104,7 @@ app.UseStaticFiles();
 //}); 
 #endregion
 
-
+app.UseMiddleware<WhiteIpAddressControlMiddleware>(); 
 
 app.UseRouting();
 
